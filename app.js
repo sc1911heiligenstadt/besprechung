@@ -5,7 +5,37 @@
 // und optional Bildschirm teilen. Vorbild-Look: die übrigen Gateway-Apps.
 // ------------------------------------------------------------------
 
-const LK = window.LivekitClient || null;
+// Die LiveKit-Bibliothek hängt bewusst NICHT fest im <head>: sie kostet 90 KB und
+// wird in der Lobby überhaupt nicht gebraucht — erst beim Betreten des Raums.
+// Geladen wird deshalb in joinRoom(), gleiche Überlegung wie beim Nutzerfoto, das
+// auch erst in enterRoomUI() geholt wird.
+//
+// ⚠️ Deshalb `let` statt `const`, und deshalb ist LK in der Lobby null. Alle
+// übrigen Verwendungsstellen (LK.RoomEvent, LK.Track.Source…) laufen ausschließlich
+// nach einem erfolgreichen Beitritt — wer eine neue außerhalb des Raums einbaut,
+// muss vorher selbst laden.
+let LK = null;
+
+let liveKitLadevorgang = null;
+function ladeLiveKit() {
+  if (window.LivekitClient) { LK = window.LivekitClient; return Promise.resolve(); }
+  if (liveKitLadevorgang) return liveKitLadevorgang;
+  liveKitLadevorgang = new Promise((resolve, reject) => {
+    const s = document.createElement("script");
+    s.src = "https://cdn.jsdelivr.net/npm/livekit-client@2/dist/livekit-client.umd.min.js";
+    s.onload = () => {
+      LK = window.LivekitClient || null;
+      if (!LK) { liveKitLadevorgang = null; reject(new Error("Video-Bibliothek geladen, aber nicht nutzbar — bitte neu laden.")); return; }
+      resolve();
+    };
+    s.onerror = () => {
+      liveKitLadevorgang = null; // nächster Versuch darf es erneut probieren
+      reject(new Error("Video-Bibliothek konnte nicht geladen werden — Internetverbindung prüfen."));
+    };
+    document.head.appendChild(s);
+  });
+  return liveKitLadevorgang;
+}
 
 let me = null;            // { username, vorname, nachname, canEdit, ... } vom Gateway
 let isModerator = false;  // = me.canEdit (Bearbeiter-Gruppen der Besprechung) → darf kicken/stummschalten
@@ -198,10 +228,13 @@ function renderChangelog() {
 // ------------------------------------------------------------------
 async function joinRoom() {
   setLobbyError("");
-  if (!LK) { setLobbyError("Video-Bibliothek konnte nicht geladen werden — Internetverbindung prüfen und neu laden."); return; }
   btnJoin.disabled = true;
   btnJoin.textContent = "Verbinde…";
   try {
+    // Erst hier die 90 KB Video-Bibliothek holen. Ein Fehlschlag landet im catch
+    // unten und damit in setLobbyError — genau dort, wo vorher der Vorab-Check
+    // seine Meldung hinschrieb.
+    await ladeLiveKit();
     const info = await fetchLivekitToken(ROOM_NAME);
     if (!info || !info.token || !info.url) throw new Error("Ungültige Token-Antwort vom Server.");
     room = new LK.Room({ adaptiveStream: true, dynacast: true });

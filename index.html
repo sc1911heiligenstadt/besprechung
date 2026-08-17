@@ -187,9 +187,11 @@
   <!-- versteckter Sammelpunkt für die Audio-Elemente der anderen -->
   <div id="audio-sink" style="display:none;"></div>
 
-  <script src="https://cdn.jsdelivr.net/npm/livekit-client@2/dist/livekit-client.umd.min.js"></script>
-  <script src="config.js?v=1.7"></script>
+  <!-- Die LiveKit-Bibliothek hängt bewusst NICHT hier: app.js lädt sie in
+       joinRoom() nach (ladeLiveKit). Sie kostet 90 KB und wird in der Lobby
+       überhaupt nicht gebraucht. -->
+  <script src="config.js?v=1.8"></script>
   <script src="db.js?v=1.1"></script>
-  <script src="app.js?v=1.5"></script>
+  <script src="app.js?v=1.6"></script>
 </body>
 </html>

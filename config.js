@@ -9,6 +9,18 @@ const ROOM_LABEL = "Besprechung";
 
 const APP_CHANGELOG = [
   {
+    version: "1.1",
+    groups: [
+      {
+        title: "Startet schneller",
+        items: [
+          "Die Video-Bibliothek wird erst geladen, wenn du den Raum wirklich betrittst. Vorher kam sie bei jedem Öffnen der Seite mit — das waren 90 KB, auch wenn man nur nachschauen wollte, ob schon jemand da ist.",
+          "Am Ablauf ändert sich nichts: „Raum betreten“ lädt sie automatisch nach. Klappt das nicht, steht der Grund wie bisher direkt unter dem Knopf."
+        ]
+      }
+    ]
+  },
+  {
     version: "1.0",
     groups: [
       {
