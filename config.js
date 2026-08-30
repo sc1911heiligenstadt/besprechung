@@ -9,6 +9,20 @@ const ROOM_LABEL = "Besprechung";
 
 const APP_CHANGELOG = [
   {
+    version: "1.2",
+    groups: [
+      {
+        title: "Der Datenschutz-Hinweis nennt jetzt den Übertragungsdienst",
+        items: [
+          "Dort stand bisher nur, dass die Daten auf Servern in Deutschland liegen. Bild, Ton und Chat laufen während einer Besprechung aber über einen externen Anbieter — anders ginge es nicht, sonst müsste jeder an jeden senden.",
+          "Der Hinweis sagt das jetzt offen und dazu, dass wir für dessen Serverstandort keine Zusicherung machen können. Aufgezeichnet wird dort nichts.",
+          "Eine Aufnahme, die jemand selbst startet, bleibt weiterhin auf dessen Gerät — das stand vorher nirgends und steht jetzt dabei.",
+          "An der Funktion ändert sich nichts — nur der Text war ungenau."
+        ]
+      }
+    ]
+  },
+  {
     version: "1.1",
     groups: [
       {
