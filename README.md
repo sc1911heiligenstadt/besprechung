@@ -6,11 +6,24 @@ der ein Teil im Raum sitzt und ein Teil zu Hause.
 
 **➡️ [Besprechung öffnen](https://sc1911heiligenstadt.github.io/besprechung/)**
 
+## Was drin ist
+
+| Reiter | Wofür |
+|---|---|
+| **Besprechung** | Die Lobby und der Raum selbst — betreten, sprechen, teilen, chatten |
+| **Info** | Was die App tut, die Änderungen und der Datenschutz-Hinweis |
+
 ## Was es kann
 
 - **Sprechen und zuhören** im Browser, ohne Installation und ohne fremdes Konto.
-- **Bildschirm teilen**, etwa um eine Auswertung oder einen Plan zu zeigen.
+  In der Lobby ist *Stummgeschaltet beitreten* vorausgewählt.
+- **Bildschirm teilen**, etwa um eine Auswertung oder einen Plan zu zeigen —
+  wahlweise im echten Vollbild. Auf dem iPhone geht das systembedingt nicht;
+  Mikrofon und Zuhören funktionieren dort normal.
 - **Chat** nebenher — flüchtig, siehe unten.
+- **Hand heben**: eine Wortmeldung erscheint auf der eigenen Kachel und in einer
+  Liste, die die Reihenfolge festhält.
+- **Moderieren**: Teilnehmer stummschalten oder aus dem Raum entfernen.
 - **Aufnahme mit Transkript** auf dem eigenen Gerät.
 
 Das Konto-Foto aus der Tools-Übersicht erscheint auch hier.
@@ -19,7 +32,7 @@ Das Konto-Foto aus der Tools-Übersicht erscheint auch hier.
 
 Die Anmeldung läuft über die [Tools-Übersicht](https://sc1911heiligenstadt.github.io/ToolsUebersicht/) — dort einmal anmelden, danach ist dieses Werkzeug offen.
 
-Dieses Werkzeug kennt keine Bearbeitungs-Stufen, weil es nichts speichert: Wer Zugriff hat, betritt den Sprachraum und kann Bildschirm und Ton teilen. Ob das Werkzeug überhaupt sichtbar ist, legt die Tools-Übersicht fest.
+Weil nichts gespeichert wird, sind die Stufen hier anders geschnitten als sonst: **Sehen** heißt bereits mitmachen — den Raum betreten, sprechen, zuhören, Bildschirm teilen, chatten und die Hand heben. **Bearbeiten** kommt nur für die Moderation dazu: stummschalten, Teilnehmer entfernen, aufnehmen und transkribieren. Geprüft wird jede dieser Aktionen auf dem Server. Wer welche Stufe hat und ob das Werkzeug überhaupt sichtbar ist, legt die Tools-Übersicht fest. Der Reiter *Info* ist für alle sichtbar.
 
 ## Lokal starten
 
@@ -29,7 +42,7 @@ Dieses Werkzeug kennt keine Bearbeitungs-Stufen, weil es nichts speichert: Wer Z
 
 Vanilla JavaScript ohne Build-Schritt — die Dateien werden so ausgeliefert, wie sie im Repo liegen. Veröffentlicht über GitHub Pages.
 
-**Dieses Werkzeug speichert nichts.** Es gibt kein Dokument in der Nextcloud, keine Chatverläufe und keine Aufzeichnung auf einem Server. Die einzige Server-Berührung ist ein kurzlebiger Zugangsschlüssel für den Sprachraum; Ton und Bild laufen danach direkt über den Medien-Dienst. Der Chat ist flüchtig — wer später dazukommt, sieht das bisher Geschriebene nicht.
+**Dieses Werkzeug speichert nichts.** Es gibt kein Dokument in der Nextcloud, keine Chatverläufe und keine Aufzeichnung auf einem Server. Die einzige Berührung mit dem Verein ist ein kurzlebiger Zugangsschlüssel für den Sprachraum; Bild, Ton und Chat laufen danach über einen externen Übertragungsdienst, für dessen Serverstandort wir keine Zusicherung machen können. Aufgezeichnet wird dort nichts. Der Chat ist flüchtig — wer später dazukommt, sieht das bisher Geschriebene nicht.
 
 Eine Aufnahme und das daraus erzeugte Transkript entstehen **auf dem Gerät der aufnehmenden Person** und landen als Datei dort. Es wird kein Ton hochgeladen. Die Aufnahme läuft nur, solange dieser Tab offen bleibt.
 

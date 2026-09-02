@@ -9,44 +9,6 @@ const ROOM_LABEL = "Besprechung";
 
 const APP_CHANGELOG = [
   {
-    version: "1.3",
-    groups: [
-      {
-        title: "Der Reiter „Info“ erklärt jetzt, was die App wirklich tut",
-        items: [
-          "Dort stand bisher ein einzelner Satz. Jetzt steht da, wofür die einzelnen Reiter da sind, was die App mit den Eingaben macht und wo etwas anderes hingehört.",
-          "Am Funktionsumfang ändert sich nichts — nur an der Beschreibung."
-        ]
-      }
-    ]
-  },
-  {
-    version: "1.2",
-    groups: [
-      {
-        title: "Der Datenschutz-Hinweis nennt jetzt den Übertragungsdienst",
-        items: [
-          "Dort stand bisher nur, dass die Daten auf Servern in Deutschland liegen. Bild, Ton und Chat laufen während einer Besprechung aber über einen externen Anbieter — anders ginge es nicht, sonst müsste jeder an jeden senden.",
-          "Der Hinweis sagt das jetzt offen und dazu, dass wir für dessen Serverstandort keine Zusicherung machen können. Aufgezeichnet wird dort nichts.",
-          "Eine Aufnahme, die jemand selbst startet, bleibt weiterhin auf dessen Gerät — das stand vorher nirgends und steht jetzt dabei.",
-          "An der Funktion ändert sich nichts — nur der Text war ungenau."
-        ]
-      }
-    ]
-  },
-  {
-    version: "1.1",
-    groups: [
-      {
-        title: "Startet schneller",
-        items: [
-          "Die Video-Bibliothek wird erst geladen, wenn du den Raum wirklich betrittst. Vorher kam sie bei jedem Öffnen der Seite mit — das waren 90 KB, auch wenn man nur nachschauen wollte, ob schon jemand da ist.",
-          "Am Ablauf ändert sich nichts: „Raum betreten“ lädt sie automatisch nach. Klappt das nicht, steht der Grund wie bisher direkt unter dem Knopf."
-        ]
-      }
-    ]
-  },
-  {
     version: "1.0",
     groups: [
       {
@@ -55,15 +17,8 @@ const APP_CHANGELOG = [
           "Sprach-Treffpunkt für Trainer: eintreten, reden, zuhören — direkt im Browser, ohne Zusatz-App.",
           "Zeigt an, wer im Raum ist und wer gerade spricht. Trägt von wenigen Trainern bis zur ganzen hybriden Versammlung.",
           "In der Lobby ist „Stummgeschaltet beitreten“ vorausgewählt — man kommt leise in den Raum und schaltet das Mikrofon frei, wenn man sprechen will.",
+          "Wer in der Tools-Übersicht unter „Mein Konto“ → „Mein Foto“ ein Bild hinterlegt hat, wird damit angezeigt; sonst bleibt es bei den Initialen in der gewohnten Farbe. Es muss also niemand etwas tun, und eine Änderung ist beim nächsten Betreten zu sehen.",
           "Im Kopfbereich gibt es bewusst kein „Zurück zum Dashboard“: die Besprechung öffnet sich in einem eigenen Tab, das Dashboard bleibt daneben stehen. So reißt kein Fehlklick jemanden mitten aus dem Gespräch oder einer laufenden Aufnahme. Zum Beenden gibt es „Verlassen“."
-        ]
-      },
-      {
-        title: "Foto auf der Teilnehmerkachel",
-        items: [
-          "Wer in der Tools-Übersicht unter „Mein Konto“ ein Foto hinterlegt hat, wird hier damit angezeigt — an der Stelle, an der sonst die Initialen stehen.",
-          "Ohne hinterlegtes Bild bleibt es bei den Initialen in der gewohnten Farbe. Es muss also niemand etwas tun.",
-          "Das Bild pflegt jeder selbst in der Tools-Übersicht unter „Mein Konto“ → „Mein Foto“. Eine Änderung dort ist beim nächsten Betreten der Besprechung zu sehen."
         ]
       },
       {
@@ -71,26 +26,18 @@ const APP_CHANGELOG = [
         items: [
           "Ein Klick, und der eigene Monitor erscheint bei allen anderen groß auf der Bühne.",
           "Die Bühne nutzt dabei die volle Fensterbreite und -höhe statt der schmalen Spalte in der Mitte.",
-          "Der Knopf oben rechts auf der Bühne schaltet echtes Vollbild ein — beenden mit demselben Knopf oder mit Esc.",
+          "Der Knopf oben rechts auf der Bühne schaltet echtes Vollbild ein — beenden mit demselben Knopf oder mit Esc. Endet die Freigabe im Vollbild, schließt sich das Vollbild von selbst.",
           "Während geteilt wird, rücken die Teilnehmerkacheln zusammen und werden kleiner. Wer spricht, bleibt am grünen Rahmen erkennbar.",
-          "Endet die Freigabe im Vollbild, schließt sich das Vollbild von selbst.",
           "Auf dem iPhone lässt sich der Bildschirm systembedingt nicht teilen; Mikrofon und Zuhören funktionieren dort normal."
         ]
       },
       {
-        title: "Chat",
+        title: "Chat und Wortmeldung",
         items: [
           "Der Knopf in der Steuerleiste öffnet einen Chat für alle im Raum — gedacht für alle, die gerade kein Mikrofon haben oder sich lieber schriftlich melden.",
-          "Der Chat klappt rechts auf, der geteilte Bildschirm rückt zur Seite statt überdeckt zu werden.",
-          "Kommt eine Nachricht bei geschlossenem Chat, erscheinen eine Vorschau und ein Zähler am Knopf.",
-          "Nachrichten sind flüchtig: sie bleiben nur während der Besprechung sichtbar und werden nirgends gespeichert. Wer später dazukommt, sieht das bisher Geschriebene nicht."
-        ]
-      },
-      {
-        title: "Wortmeldung",
-        items: [
-          "Der Knopf „Hand heben“ zeigt allen, dass man etwas sagen möchte — auf der eigenen Kachel und in einer Liste über den Teilnehmern.",
-          "Die Liste hält die Reihenfolge der Meldungen fest, damit niemand übersehen wird.",
+          "Der Chat klappt rechts auf, der geteilte Bildschirm rückt zur Seite statt überdeckt zu werden. Kommt eine Nachricht bei geschlossenem Chat, erscheinen eine Vorschau und ein Zähler am Knopf.",
+          "Nachrichten sind flüchtig: sie bleiben nur während der Besprechung sichtbar und werden nirgends gespeichert. Wer später dazukommt, sieht das bisher Geschriebene nicht.",
+          "Der Knopf „Hand heben“ zeigt allen, dass man etwas sagen möchte — auf der eigenen Kachel und in einer Liste über den Teilnehmern. Die Liste hält die Reihenfolge der Meldungen fest, damit niemand übersehen wird.",
           "Die eigene Meldung nimmt derselbe Knopf zurück; Moderatoren können eine erledigte Wortmeldung abhaken."
         ]
       },
@@ -116,7 +63,9 @@ const APP_CHANGELOG = [
         title: "Nichts wird gespeichert",
         items: [
           "Die Besprechung legt bewusst nichts dauerhaft ab: keinen Chatverlauf, keine Aufzeichnung auf dem Server, keine Teilnehmerliste.",
-          "Die einzige Server-Berührung ist der Eintritt in den Raum. Danach läuft der Ton direkt zwischen den Teilnehmern und dem Verteilserver."
+          "Die einzige Berührung mit dem Verein ist der kurzlebige Zugangsschlüssel für den Raum.",
+          "Bild, Ton und Chat laufen während der Besprechung über einen externen Übertragungsdienst — anders ginge es nicht, sonst müsste jeder an jeden senden. Für dessen Serverstandort können wir keine Zusicherung machen. Aufgezeichnet wird dort nichts.",
+          "Eine Aufnahme, die jemand selbst startet, bleibt auf dessen Gerät. Es wird kein Ton hochgeladen."
         ]
       },
       {
