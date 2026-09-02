@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>🎙️ Besprechung</title>
+<meta name="theme-color" content="#1a56a0" />
+<link rel="stylesheet" href="style.css?v=1.0" />
+</head>
+<body>
+
+  <!-- ---------- Nicht angemeldet ---------- -->
+  <div class="connect-screen" id="connect-screen">
+    <div class="card">
+      <h2>🎙️ Besprechung</h2>
+      <p id="connect-message">Bitte über die Tools-Übersicht anmelden, um die Besprechung zu betreten.</p>
+      <div class="btn-row">
+        <a class="btn" href="https://sc1911heiligenstadt.github.io/ToolsUebersicht/">Zur Tools-Übersicht</a>
+      </div>
+      <p class="muted" id="cloud-error" style="margin-top:14px;"></p>
+    </div>
+  </div>
+
+  <!-- ---------- Angemeldet ---------- -->
+  <div id="app-shell" style="display:none;">
+    <header>
+      <h1>🎙️ Besprechung</h1>
+      <!-- Bewusst KEIN „Zurück zum Dashboard“ (anders als die übrigen Apps): die
+           Besprechung öffnet in einem eigenen Tab, das Dashboard bleibt daneben offen.
+           Ein Fehlklick hier würde mitten aus dem Gespräch und aus einer laufenden
+           Aufnahme herausführen. Raus geht es über „Verlassen“. -->
+      <div class="header-right">
+        <span class="header-status" id="save-status"></span>
+        <span class="header-user" id="header-user"></span>
+        <img class="header-logo" src="https://sc1911heiligenstadt.github.io/logo.svg" alt="1. SC 1911 Heiligenstadt e.V." />
+      </div>
+    </header>
+
+    <nav>
+      <button data-tab="besprechung" class="active">Besprechung</button>
+      <button data-tab="info" style="margin-left:auto;">Info</button>
+    </nav>
+
+    <main>
+
+      <div class="tab-section active" id="tab-besprechung">
+
+      <!-- ---------- Lobby (vor dem Betreten) ---------- -->
+      <section id="lobby">
+        <div class="card lobby-card">
+          <h2 id="lobby-title"></h2>
+          <p class="muted">
+            Der digitale Treffpunkt für Trainer: Betritt den Raum, um mit den anderen zu sprechen,
+            und teile bei Bedarf deinen Bildschirm — alles direkt im Browser, ohne Zusatz-App.
+          </p>
+          <div class="lobby-actions">
+            <label class="check-label"><input type="checkbox" id="join-muted" checked /> Stummgeschaltet beitreten</label>
+            <button class="btn success" id="btn-join">🎙️ Raum betreten</button>
+          </div>
+          <p class="muted lobby-hint" id="lobby-hint">
+            Beim ersten Betreten fragt der Browser nach Mikrofon-Zugriff — das ist nötig, damit dich
+            die anderen hören.
+          </p>
+          <p class="muted lobby-error" id="lobby-error"></p>
+        </div>
+      </section>
+
+      <!-- ---------- Im Raum ---------- -->
+      <section id="room" class="hidden">
+        <div class="rec-banner hidden" id="rec-banner">
+          <span class="rec-dot">●</span> <span id="rec-banner-text">Aufnahme läuft</span>
+        </div>
+        <div class="stage hidden" id="stage">
+          <div class="stage-label" id="stage-label"></div>
+          <button class="stage-fs-btn" id="btn-stage-fullscreen" type="button"
+                  title="Vollbild" aria-label="Vollbild">⛶</button>
+          <!-- geteiltes Bildschirm-Video wird hier eingehängt -->
+        </div>
+        <div class="hand-queue hidden" id="hand-queue" aria-live="polite"></div>
+        <div class="room-bar">
+          <span class="room-count" id="room-count"></span>
+          <button class="btn small secondary hidden" id="btn-audio-unlock">🔊 Ton aktivieren</button>
+        </div>
+        <div class="participant-grid" id="participant-grid"></div>
+      </section>
+
+      </div>
+
+      <!-- ---------- Info ---------- -->
+      <div class="tab-section" id="tab-info">
+        <div class="card">
+          <h2>Über die Besprechung <span class="version-badge" id="version-badge-2"></span></h2>
+          <p class="muted">
+            Digitaler Treffpunkt für Trainer: Sprachraum direkt im Browser, inklusive
+            Bildschirm teilen — z. B. für die hybride Trainerversammlung. Dieses Werkzeug speichert
+            nichts: kein Dokument, keine Chatverläufe, keine Aufzeichnung auf einem Server. Der Chat
+            ist flüchtig — wer später dazukommt, sieht das bisher Geschriebene nicht. Eine Aufnahme
+            samt Transkript entsteht auf dem Gerät der aufnehmenden Person und landet als Datei dort;
+            es wird kein Ton hochgeladen.
+          </p>
+        </div>
+        <div class="card">
+          <h2>Änderungen</h2>
+          <div id="changelog-list"></div>
+        </div>
+      
+    <div class="card" id="ds-info-karte">
+      <h2>Datenschutz</h2>
+      <p>Dieses Werkzeug gehört zu den internen Anwendungen des
+      1. SC 1911 Heiligenstadt. Die hier erfassten Daten werden ausschließlich
+      für die Vereinsarbeit verwendet und liegen auf Servern in Deutschland,
+      die ein Auftragsverarbeiter für den Verein betreibt. Eine Weitergabe an
+      Dritte findet nur statt, soweit sie für den jeweiligen Zweck erforderlich
+      oder gesetzlich vorgeschrieben ist.</p>
+      <p><strong>Bild, Ton und Chat laufen über einen externen Dienst.</strong>
+      Damit nicht jeder an jeden senden muss, verteilt ein Anbieter für
+      Videoübertragung die Daten während der Besprechung. Aufgezeichnet wird dort
+      nichts, und wir speichern weder Gespräche noch Chatverlauf. Für den
+      Serverstandort dieses Anbieters können wir keine Zusicherung machen; eine
+      Übermittlung in Länder außerhalb der EU ist nicht ausgeschlossen. Eine
+      Aufnahme, die jemand selbst startet, bleibt dagegen auf dessen Gerät — sie
+      wird nirgendwohin übertragen.</p>
+      <p>Verantwortlich ist der 1. SC 1911 Heiligenstadt, Leineberg 2,
+      37308 Heilbad Heiligenstadt, Telefon 03606 612206,
+      <a href="mailto:info@sc1911-heiligenstadt.de">info@sc1911-heiligenstadt.de</a>.
+      Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung,
+      Datenübertragbarkeit und Widerspruch lassen sich unter dieser Anschrift
+      geltend machen. Beschwerden nimmt der Thüringer Landesbeauftragte für
+      den Datenschutz und die Informationsfreiheit entgegen.</p>
+      <p><a href="https://www.sc1911-heiligenstadt.de/datenschutz/" target="_blank" rel="noopener">Datenschutzerklärung des Vereins</a>
+      &middot;
+      <a href="https://www.sc1911-heiligenstadt.de/impressum-2/" target="_blank" rel="noopener">Impressum</a></p>
+    </div>
+</div>
+
+    </main>
+
+    <!-- ---------- Steuerleiste (nur im Raum) ---------- -->
+    <div class="controls hidden" id="controls">
+      <button class="ctrl-btn" id="btn-mic" type="button">
+        <span class="ctrl-icon" id="mic-icon">🎙️</span>
+        <span class="ctrl-label" id="mic-label">Mikro an</span>
+      </button>
+      <button class="ctrl-btn" id="btn-screen" type="button">
+        <span class="ctrl-icon">🖥️</span>
+        <span class="ctrl-label" id="screen-label">Bildschirm teilen</span>
+      </button>
+      <button class="ctrl-btn" id="btn-hand" type="button"
+              title="Wortmeldung anmelden — alle sehen, dass du etwas sagen möchtest.">
+        <span class="ctrl-icon">✋</span>
+        <span class="ctrl-label" id="hand-label">Hand heben</span>
+      </button>
+      <button class="ctrl-btn" id="btn-chat" type="button"
+              title="Chat für alle im Raum — auch ohne Mikrofon.">
+        <span class="ctrl-icon">💬</span>
+        <span class="ctrl-label">Chat</span>
+        <span class="chat-badge hidden" id="chat-badge">0</span>
+      </button>
+      <button class="ctrl-btn hidden" id="btn-record" type="button">
+        <span class="ctrl-icon" id="rec-icon">⏺</span>
+        <span class="ctrl-label" id="rec-label">Aufnehmen</span>
+      </button>
+      <button class="ctrl-btn hidden" id="btn-transcribe" type="button"
+              title="Wenn aktiv, wird nach dem Stoppen der Aufnahme ein Text-Transkript erstellt — komplett lokal im Browser, nichts verlässt dein Gerät.">
+        <span class="ctrl-icon">📝</span>
+        <span class="ctrl-label" id="transcribe-label">Transkript</span>
+      </button>
+      <button class="ctrl-btn danger" id="btn-leave" type="button">
+        <span class="ctrl-icon">🚪</span>
+        <span class="ctrl-label">Verlassen</span>
+      </button>
+    </div>
+
+    <!-- ---------- Chat (nur im Raum, flüchtig) ---------- -->
+    <aside class="chat-panel hidden" id="chat-panel" aria-label="Chat">
+      <div class="chat-head">
+        <span>💬 Chat</span>
+        <button class="chat-close" id="btn-chat-close" type="button" title="Chat schließen" aria-label="Chat schließen">✕</button>
+      </div>
+      <div class="chat-log" id="chat-log" role="log" aria-live="polite"></div>
+      <form class="chat-form" id="chat-form" autocomplete="off">
+        <input id="chat-input" type="text" maxlength="500" placeholder="Nachricht an alle …" aria-label="Nachricht" />
+        <button class="btn small" type="submit">Senden</button>
+      </form>
+      <p class="chat-hint">Nachrichten bleiben nur während der Besprechung sichtbar — wer später dazukommt, sieht sie nicht.</p>
+    </aside>
+
+    <!-- Hinweis auf neue Nachricht, wenn der Chat zu ist -->
+    <div class="chat-toast hidden" id="chat-toast" role="status" aria-live="polite"></div>
+
+    <!-- Transkript-Fortschritt (lokal, nachträglich) -->
+    <div class="transcribe-status hidden" id="transcribe-status" role="status" aria-live="polite">
+      <span class="transcribe-spinner" aria-hidden="true"></span>
+      <span id="transcribe-status-text">Transkript wird erstellt …</span>
+    </div>
+  </div>
+
+  <!-- versteckter Sammelpunkt für die Audio-Elemente der anderen -->
+  <div id="audio-sink" style="display:none;"></div>
+
+  <!-- Die LiveKit-Bibliothek hängt bewusst NICHT hier: app.js lädt sie in
+       joinRoom() nach (ladeLiveKit). Sie kostet 90 KB und wird in der Lobby
+       überhaupt nicht gebraucht. -->
+  <script src="config.js?v=1.0"></script>
+  <script src="db.js?v=1.0"></script>
+  <script src="app.js?v=1.0"></script>
+</body>
+</html>
